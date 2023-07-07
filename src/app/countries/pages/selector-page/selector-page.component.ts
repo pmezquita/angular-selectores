@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CountriesService} from "../../services/countries.service";
 import {Region} from "../../interfaces/country.interface";
@@ -8,7 +8,7 @@ import {Region} from "../../interfaces/country.interface";
   templateUrl: './selector-page.component.html',
   styles: []
 })
-export class SelectorPageComponent {
+export class SelectorPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
@@ -22,8 +22,18 @@ export class SelectorPageComponent {
     borders: ['', Validators.required],
   });
 
-  get regions():Region[]{
+  get regions(): Region[] {
     return this.countriesService.regions;
+  }
+
+  ngOnInit() {
+    this.onRegionChanged();
+  }
+
+  private onRegionChanged = (): void => {
+    this.myForm.get('region')?.valueChanges.subscribe(region => {
+      console.log({region});
+    });
   }
 
 }
