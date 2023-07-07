@@ -9,7 +9,7 @@ export enum Region {
 export interface SmallCountry{
   name:   string;
   cca3:   string;
-  border: Region[];
+  border: string[];
 }
 
 export interface Country {
@@ -24,7 +24,7 @@ export interface Country {
   translations: { [key: string]: Translation };
   latlng:       number[];
   landlocked:   boolean;
-  borders?:     Region[];
+  borders?:     string[];
   area:         number;
   demonyms:     Demonyms;
   flag:         string;
